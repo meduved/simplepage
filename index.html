@@ -1,85 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MP3 Player</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .link-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 10px auto;
-      padding: 10px;
-      max-width: 90%;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-    }
-    .link-container a {
-      flex: 1;
-      text-decoration: none;
-      color: #007BFF;
-      font-size: 16px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .play-button {
-      cursor: pointer;
-      padding: 8px 12px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 14px;
-      margin-left: 10px;
-    }
-    .play-button:hover {
-      background-color: #45a049;
-    }
-    audio {
-      display: block;
-      margin: 20px auto;
-      width: 90%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP3 Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+
+        .cover {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            /* Ensures the cover maintains its aspect ratio */
+            background: url('cover.png') no-repeat center center;
+            background-size: contain;
+            /* Ensures the whole image is visible */
+        }
+
+
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .header button {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: #6c63ff;
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: #5a54d1;
+        }
+
+        .subscribe {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .subscribe:hover {
+            background-color: #d6d6d6;
+        }
+
+        .track-list {
+            padding: 20px;
+        }
+
+        .track {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .track:last-child {
+            border-bottom: none;
+        }
+
+        .track a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .track button {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .track button:hover {
+            background-color: #5a54d1;
+        }
+
+        audio {
+            display: none;
+            margin: 20px auto;
+            width: 90%;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>MP3 Player</h1>
-  <div id="links">
-    <div class="link-container">
-      <a href="https://drive.google.com/file/d/1JF8dqKUGQ7xdwjQI9HECe5uibNWBrMot/view?usp=drivesdk" target="_blank">Audio 1</a>
-      <button class="play-button" onclick="playAudio('audio1.mp3')">Play</button>
+    <div class="container">
+        <div class="cover"></div>
+        <div class="header">
+            <!-- <h1>The Striving Artist Podcast</h1>
+            <button class="play-all" onclick="playAll()">Play All Show</button>
+            <button class="subscribe">Subscribe</button> -->
+        </div>
+        <div class="track-list">
+            <div class="track">
+                <a href="audio1.mp3" target="_blank">Prolog-Bažina 1969</a>
+                <button onclick="playAudio('audio1.mp3', this)">▶</button>
+            </div>
+            <div class="track">
+                <a href="02-Máma 1952.mp3" target="_blank">01-Máma 1952</a>
+                <button onclick="playAudio('audio2.mp3', this)">▶</button>
+            </div>
+            <div class="track">
+                <a href="03-Jodie 1952.mp3" target="_blank">02-Jodie 1952</a>
+                <button onclick="playAudio('audio3.mp3', this)">▶</button>
+            </div>
+        </div>
+        <audio id="audioPlayer" controls></audio>
+        <div class="header">
+            <button class="btn">Stahnout kompletni knihu</button>
+        </div>
     </div>
-    <div class="link-container">
-      <a href="audio2.mp3" target="_blank">Audio 2</a>
-      <button class="play-button" onclick="playAudio('audio2.mp3')">Play</button>
-    </div>
-    <div class="link-container">
-      <a href="audio3.mp3" target="_blank">Audio 3</a>
-      <button class="play-button" onclick="playAudio('audio3.mp3')">Play</button>
-    </div>
-  </div>
 
-  <audio id="audioPlayer" controls></audio>
+    <script>
+        let currentAudio = null; // Keeps track of the currently playing audio
 
-  <script>
-    function playAudio(src) {
-      const audioPlayer = document.getElementById('audioPlayer');
-      audioPlayer.src = src;
-      audioPlayer.play();
-    }
-  </script>
+        function playAudio(src, button) {
+            const audioPlayer = document.getElementById('audioPlayer');
+
+            // If the same audio is playing, toggle pause/play
+            if (currentAudio === src && !audioPlayer.paused) {
+                audioPlayer.pause();
+                button.textContent = '▶'; // Update button to play icon
+            } else {
+                audioPlayer.src = src;
+                audioPlayer.play();
+                currentAudio = src;
+
+                // Reset all buttons to '▶' and set the current button to '⏸'
+                const buttons = document.querySelectorAll('.track button');
+                buttons.forEach(btn => btn.textContent = '▶');
+                button.textContent = '⏸'; // Update button to pause icon
+            }
+
+            // When audio ends, reset the button to '▶'
+            audioPlayer.onended = () => {
+                button.textContent = '▶';
+                currentAudio = null;
+            };
+        }
+
+        function playAll() {
+            const tracks = ['audio1.mp3', 'audio2.mp3', 'audio3.mp3'];
+            let currentTrack = 0;
+            const audioPlayer = document.getElementById('audioPlayer');
+
+            function playNext() {
+                if (currentTrack < tracks.length) {
+                    audioPlayer.src = tracks[currentTrack];
+                    audioPlayer.play();
+                    currentTrack++;
+                }
+            }
+
+            audioPlayer.onended = playNext;
+            playNext();
+        }
+    </script>
 </body>
+
 </html>
