@@ -1,1 +1,85 @@
-<h1>hello, how are you?</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MP3 Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .link-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px auto;
+      padding: 10px;
+      max-width: 90%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .link-container a {
+      flex: 1;
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .play-button {
+      cursor: pointer;
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    .play-button:hover {
+      background-color: #45a049;
+    }
+    audio {
+      display: block;
+      margin: 20px auto;
+      width: 90%;
+    }
+  </style>
+</head>
+<body>
+  <h1>MP3 Player</h1>
+  <div id="links">
+    <div class="link-container">
+      <a href="audio1.mp3" target="_blank">Audio 1</a>
+      <button class="play-button" onclick="playAudio('audio1.mp3')">Play</button>
+    </div>
+    <div class="link-container">
+      <a href="audio2.mp3" target="_blank">Audio 2</a>
+      <button class="play-button" onclick="playAudio('audio2.mp3')">Play</button>
+    </div>
+    <div class="link-container">
+      <a href="audio3.mp3" target="_blank">Audio 3</a>
+      <button class="play-button" onclick="playAudio('audio3.mp3')">Play</button>
+    </div>
+  </div>
+
+  <audio id="audioPlayer" controls></audio>
+
+  <script>
+    function playAudio(src) {
+      const audioPlayer = document.getElementById('audioPlayer');
+      audioPlayer.src = src;
+      audioPlayer.play();
+    }
+  </script>
+</body>
+</html>
